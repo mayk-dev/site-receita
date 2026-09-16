@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Resultado da Operação</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            width: 100%;
+            min-height: 100vh;
+
+            background-image:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.75),
+                    rgba(0, 0, 0, 0.85)
+                ),
+                url("assets/fundo.png");
+
+            background-size: cover;
+            background-position: center;
+
+            font-family: Arial, sans-serif;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            color: white;
+        }
+
+
+        .resultado {
+
+            width: 90%;
+            max-width: 500px;
+
+            background: rgba(20, 25, 35, 0.95);
+
+            border: 3px solid white;
+
+            border-radius: 20px;
+
+            padding: 30px;
+
+            text-align: center;
+
+        }
+
+
+        h1 {
+
+            font-size: 26px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        #status {
+
+            font-size: 30px;
+
+            font-weight: bold;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .linha {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 15px;
+
+            margin-bottom: 10px;
+
+            border-radius: 10px;
+
+            background-color:
+                rgba(255, 255, 255, 0.1);
+
+        }
+
+
+        .linha span {
+
+            text-align: left;
+
+        }
+
+
+        .linha strong {
+
+            font-size: 20px;
+
+        }
+
+
+        #mensagem {
+
+            margin-top: 25px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+        }
+
+
+        #jogar-novamente {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            width: 100%;
+
+            height: 60px;
+
+            margin-top: 30px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #ff7a18,
+                    #ff5100
+                );
+
+            color: white;
+
+            border: 3px solid white;
+
+            border-radius: 14px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            text-decoration: none;
+
+            box-shadow:
+                0 6px 0 #9e2b00;
+
+        }
+
+
+        #jogar-novamente:active {
+
+            transform: translateY(4px);
+
+            box-shadow:
+                0 2px 0 #9e2b00;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="resultado">
+
+        <h1>RESULTADO DA OPERAÇÃO</h1>
+
+
+        <div id="status">
+            ANALISANDO...
+        </div>
+
+
+        <div class="linha">
+
+            <span>Pacotes na Saca</span>
+
+            <strong id="saca">0</strong>
+
+        </div>
+
+
+        <div class="linha">
+
+            <span>Pacotes na Tratativa</span>
+
+            <strong id="tratativa">0</strong>
+
+        </div>
+
+
+        <div class="linha">
+
+            <span>Pacotes na Caixa</span>
+
+            <strong id="caixa">0</strong>
+
+        </div>
+
+
+        <div class="linha">
+
+            <span>Corretos na Caixa</span>
+
+            <strong id="corretos">0</strong>
+
+        </div>
+
+
+        <div class="linha">
+
+            <span>Incorretos na Caixa</span>
+
+            <strong id="errados">0</strong>
+
+        </div>
+
+
+        <div class="linha">
+
+            <span>Chegou ao teto</span>
+
+            <strong id="teto">NÃO</strong>
+
+        </div>
+
+
+        <div id="mensagem"></div>
+
+
+        <a
+            href="index.html"
+            id="jogar-novamente"
+        >
+            JOGAR NOVAMENTE
+        </a>
+
+    </div>
+
+
+    <script>
+
+        // Pega os dados enviados pelo jogo
+        const dados =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const totalSaca =
+            dados.get("saca") || "0";
+
+        const totalTratativa =
+            dados.get("tratativa") || "0";
+
+        const totalCaixa =
+            dados.get("caixa") || "0";
+
+        const caixaCorretos =
+            dados.get("corretos") || "0";
+
+        const caixaErrados =
+            dados.get("errados") || "0";
+
+        const chegouNoTeto =
+            dados.get("teto") === "true";
+
+        const aprovado =
+            dados.get("aprovado") === "true";
+
+
+        // Mostra os números na tela
+
+        document
+            .getElementById("saca")
+            .textContent = totalSaca;
+
+
+        document
+            .getElementById("tratativa")
+            .textContent = totalTratativa;
+
+
+        document
+            .getElementById("caixa")
+            .textContent = totalCaixa;
+
+
+        document
+            .getElementById("corretos")
+            .textContent = caixaCorretos;
+
+
+        document
+            .getElementById("errados")
+            .textContent = caixaErrados;
+
+
+        document
+            .getElementById("teto")
+            .textContent =
+                chegouNoTeto
+                    ? "SIM"
+                    : "NÃO";
+
+
+        // Resultado final
+
+        const status =
+            document.getElementById("status");
+
+        const mensagem =
+            document.getElementById("mensagem");
+
+
+        if (aprovado) {
+
+            status.textContent =
+                "✓ CARGA APROVADA";
+
+            status.style.color =
+                "#5cff72";
+
+            mensagem.textContent =
+                "Carga liberada para expedição.";
+
+        }
+
+        else {
+
+            status.textContent =
+                "✕ AUDITORIA";
+
+            status.style.color =
+                "#ff5555";
+
+            mensagem.textContent =
+                "Sua caixa foi pega na auditoria.";
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

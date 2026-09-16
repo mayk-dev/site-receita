@@ -1,4 +1,5 @@
-
+let totalSaca = 0;
+let totalTratativa = 0;
 
 const areaPacotes = document.getElementById("pacotes");
 
@@ -8,6 +9,10 @@ const areaPacotes = document.getElementById("pacotes");
 // =============================
 
   const listaPacotes = [
+{
+        imagem: "assets/caixa violada.png",
+        destino: "tratativa"
+    },
 
     {
         imagem: "assets/caixa 1,10 -12kg.png",
@@ -20,47 +25,53 @@ const areaPacotes = document.getElementById("pacotes");
         destino: "saca"
     }
 
+    
+
 ];
 
-function verificarSaca(pacote) {
+function verificarTratativa(pacote) {
 
-    const areaSaca = document.getElementById("area-saca");
+    const gaiola =
+        document.getElementById("gaiolatratativa");
 
-    const posicaoPacote = pacote.getBoundingClientRect();
+    const posicaoPacote =
+        pacote.getBoundingClientRect();
 
-    const posicaoSaca = areaSaca.getBoundingClientRect();
+    const posicaoGaiola =
+        gaiola.getBoundingClientRect();
 
 
     const centroX =
-        posicaoPacote.left + posicaoPacote.width / 2;
+        posicaoPacote.left +
+        posicaoPacote.width / 2;
 
     const centroY =
-        posicaoPacote.top + posicaoPacote.height / 2;
+        posicaoPacote.top +
+        posicaoPacote.height / 2;
 
 
-    const dentroDaSaca =
-
-        centroX >= posicaoSaca.left &&
-        centroX <= posicaoSaca.right &&
-
-        centroY >= posicaoSaca.top &&
-        centroY <= posicaoSaca.bottom;
+    const dentroDaTratativa =
+        centroX >= posicaoGaiola.left &&
+        centroX <= posicaoGaiola.right &&
+        centroY >= posicaoGaiola.top &&
+        centroY <= posicaoGaiola.bottom;
 
 
-    if (dentroDaSaca) {
+    if (
+        dentroDaTratativa &&
+        pacote.dataset.destino === "tratativa"
+    ) {
+        totalTratativa++;
+        console.log("PACOTE CORRETO NA TRATATIVA");
 
-        console.log("PACOTE COLOCADO NA SACA");
-
-
-        // Faz o pacote diminuir e desaparecer
         pacote.style.transition = "0.3s";
 
-        pacote.style.transform = "scale(0)";
+        pacote.style.transform =
+            "scale(0) rotate(20deg)";
 
         pacote.style.opacity = "0";
 
 
-        // Remove definitivamente
         setTimeout(function() {
 
             pacote.remove();
@@ -71,73 +82,99 @@ function verificarSaca(pacote) {
 
 }
 
-function verificarCaixa(pacote) {
+function verificarSaca(pacote) {
 
-    const areaCaixa = document.getElementById("area-caixa");
+    const saca =
+        document.getElementById("saca");
 
-    const posicaoPacote = pacote.getBoundingClientRect();
-    const posicaoCaixa = areaCaixa.getBoundingClientRect();
+    const posicaoPacote =
+        pacote.getBoundingClientRect();
 
-    // Centro do pacote
+    const posicaoSaca =
+        saca.getBoundingClientRect();
+
+
     const centroX =
-        posicaoPacote.left + posicaoPacote.width / 2;
+        posicaoPacote.left +
+        posicaoPacote.width / 2;
 
     const centroY =
-        posicaoPacote.top + posicaoPacote.height / 2;
+        posicaoPacote.top +
+        posicaoPacote.height / 2;
 
 
-    // Verifica se o centro está dentro da caixa
+    const dentroDaSaca =
+        centroX >= posicaoSaca.left &&
+        centroX <= posicaoSaca.right &&
+        centroY >= posicaoSaca.top &&
+        centroY <= posicaoSaca.bottom;
+
+
+    if (
+        dentroDaSaca &&
+        pacote.dataset.destino === "saca"
+    ) {
+
+        totalSaca++;
+
+        console.log("PACOTE CORRETO NA SACA");
+
+        pacote.style.transition = "0.3s";
+
+        pacote.style.transform =
+            "scale(0) rotate(20deg)";
+
+        pacote.style.opacity = "0";
+
+
+        setTimeout(function() {
+
+            pacote.remove();
+
+        }, 300);
+
+    }
+
+
+}
+
+function verificarCaixa(pacote) {
+
+    const caixa =
+        document.getElementById("caixa");
+
+    const posicaoPacote =
+        pacote.getBoundingClientRect();
+
+    const posicaoCaixa =
+        caixa.getBoundingClientRect();
+
+
     const dentroDaCaixa =
 
-    posicaoPacote.left >= posicaoCaixa.left &&
-    posicaoPacote.right <= posicaoCaixa.right &&
-    posicaoPacote.top >= posicaoCaixa.top &&
-    posicaoPacote.bottom <= posicaoCaixa.bottom;
+        posicaoPacote.left >= posicaoCaixa.left &&
+        posicaoPacote.right <= posicaoCaixa.right &&
+
+        posicaoPacote.top >= posicaoCaixa.top &&
+        posicaoPacote.bottom <= posicaoCaixa.bottom;
+
 
     if (dentroDaCaixa) {
 
-    // Marca o pacote como colocado
-    pacote.dataset.travado = "true";
+        pacote.dataset.travado = "true";
 
-    // Muda o cursor
-    pacote.style.cursor = "default";
+        pacote.style.cursor = "default";
 
-    console.log("Pacote travado na caixa");
-
-}
-
-}
-
-function mostrarResultado(aprovado) {
-
-    const telaResultado =
-        document.getElementById("tela-resultado");
-
-    const status =
-        document.getElementById("status-resultado");
-
-    const texto =
-        document.getElementById("texto-resultado");
-
-    telaResultado.style.display = "flex";
-
-
-    if (aprovado) {
-
-        status.textContent = "CARGA APROVADA";
-
-        texto.textContent =
-            "Unitização concluída corretamente. Carga liberada para expedição.";
-
-    } else {
-
-        status.textContent = "AUDITORIA";
-
-        texto.textContent =
-            "Sua caixa foi pega na auditoria.";
+        console.log("Pacote travado na caixa");
 
     }
+
+
+
 }
+
+
+
 
 // =============================
 // CRIAR PACOTE
@@ -260,9 +297,12 @@ pacote.addEventListener("pointerup", function(evento) {
 
     pacote.releasePointerCapture(evento.pointerId);
 
+
     verificarSaca(pacote);
 
     verificarCaixa(pacote);
+
+    verificarTratativa(pacote);
 
 });
 
@@ -274,68 +314,177 @@ pacote.addEventListener("pointerup", function(evento) {
 
 criarPacote();
 
-function auditarExpedicao() {
 
-    const areaCaixa = document.getElementById("area-caixa");
-    const caixa = areaCaixa.getBoundingClientRect();
 
-    const pacotesNaCaixa =
-        document.querySelectorAll('.pacote[data-local="caixa"]');
 
-    let caixaValida = true;
+ 
+ // ==============================
+   
+    document
+    .getElementById("botão")
+    .addEventListener("click", function(evento) {
 
-    // Verifica se todos os pacotes colocados na caixa
-    // realmente pertencem à caixa
-    pacotesNaCaixa.forEach(function(pacote) {
+        evento.preventDefault();
 
-        if (pacote.dataset.destino !== "caixa") {
-            caixaValida = false;
+
+        // =============================
+        // ÁREA REAL DA CAIXA
+        // =============================
+
+        const caixaElemento =
+            document.getElementById("caixa");
+
+        const caixa =
+            caixaElemento.getBoundingClientRect();
+
+
+        // Pacotes travados dentro da caixa
+        const pacotesNaCaixa =
+            document.querySelectorAll(
+                '.pacote[data-travado="true"]'
+            );
+
+
+        let totalCaixa = 0;
+        let caixaCorretos = 0;
+        let caixaErrados = 0;
+
+
+        // =============================
+        // LIMITES DA OCUPAÇÃO
+        // =============================
+
+        let menorLeft = caixa.right;
+        let maiorRight = caixa.left;
+
+        let menorTop = caixa.bottom;
+        let maiorBottom = caixa.top;
+
+
+        // =============================
+        // ANALISAR PACOTES
+        // =============================
+
+        pacotesNaCaixa.forEach(function(pacote) {
+
+            totalCaixa++;
+
+            const posicao =
+                pacote.getBoundingClientRect();
+
+
+            // Verifica destino
+            if (
+                pacote.dataset.destino === "caixa"
+            ) {
+
+                caixaCorretos++;
+
+            } else {
+
+                caixaErrados++;
+
+            }
+
+
+            // Mede largura ocupada
+            if (posicao.left < menorLeft) {
+                menorLeft = posicao.left;
+            }
+
+            if (posicao.right > maiorRight) {
+                maiorRight = posicao.right;
+            }
+
+
+            // Mede altura ocupada
+            if (posicao.top < menorTop) {
+                menorTop = posicao.top;
+            }
+
+            if (posicao.bottom > maiorBottom) {
+                maiorBottom = posicao.bottom;
+            }
+
+        });
+
+
+        // =============================
+        // CALCULAR OCUPAÇÃO
+        // =============================
+
+        let ocupacaoLargura = 0;
+        let ocupacaoAltura = 0;
+
+
+        if (totalCaixa > 0) {
+
+            const larguraOcupada =
+                maiorRight - menorLeft;
+
+            const alturaOcupada =
+                maiorBottom - menorTop;
+
+
+            ocupacaoLargura =
+                (larguraOcupada / caixa.width) * 100;
+
+            ocupacaoAltura =
+                (alturaOcupada / caixa.height) * 100;
+
         }
 
+
+        // Limita em 100%
+        ocupacaoLargura =
+            Math.min(ocupacaoLargura, 100);
+
+        ocupacaoAltura =
+            Math.min(ocupacaoAltura, 100);
+
+
+        // =============================
+        // META DA CAIXA
+        // =============================
+
+        const caixaPreenchida =
+            ocupacaoLargura >= 85 &&
+            ocupacaoAltura >= 85;
+
+
+        // =============================
+        // RESULTADO
+        // =============================
+
+        const aprovado =
+            totalCaixa > 0 &&
+            caixaErrados === 0 &&
+            caixaPreenchida;
+
+
+        // =============================
+        // IR PARA RESULTADO
+        // =============================
+
+        window.location.href =
+            "resultado.html" +
+
+            "?saca=" + totalSaca +
+
+            "&tratativa=" + totalTratativa +
+
+            "&caixa=" + totalCaixa +
+
+            "&corretos=" + caixaCorretos +
+
+            "&errados=" + caixaErrados +
+
+            "&largura=" +
+            ocupacaoLargura.toFixed(0) +
+
+            "&altura=" +
+            ocupacaoAltura.toFixed(0) +
+
+            "&aprovado=" + aprovado;
+
     });
-
-
-    // ==============================
-    // VERIFICAR OCUPAÇÃO ATÉ O TETO
-    // ==============================
-
-    let chegouNoTeto = false;
-
-    pacotesNaCaixa.forEach(function(pacote) {
-
-        const posicao = pacote.getBoundingClientRect();
-
-        // tolerância de 10px
-        if (posicao.top <= caixa.top + 10) {
-            chegouNoTeto = true;
-        }
-
-    });
-
-
-    // ==============================
-    // RESULTADO DA AUDITORIA
-    // ==============================
-
-    if (
-    caixaValida &&
-    pacotesInvalidos === 0 &&
-    chegouNoTeto
-) {
-
-    mostrarResultado(true);
-
-} else {
-
-    mostrarResultado(false);
-
-}
-
-document
-    .getElementById("jogar-novamente")
-    .addEventListener("click", function() {
-
-        location.reload();
-
-    });
-}
