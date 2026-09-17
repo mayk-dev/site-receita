@@ -32,9 +32,16 @@ const areaPacotes = document.getElementById("pacotes");
     {
         imagem: "assets/caixa simples.png",
         destino: "saca"
-    }
-
-    
+    },
+    {
+        imagem: "assets/dinheiro.png",
+        destino: "tratativa"
+    },
+    {
+        imagem: "assets/fragil.png",
+        destino: "caixa"
+        
+    },
 
 ];
 
