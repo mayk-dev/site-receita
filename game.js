@@ -13,6 +13,15 @@ const areaPacotes = document.getElementById("pacotes");
         imagem: "assets/caixa violada.png",
         destino: "tratativa"
     },
+{
+        imagem: "assets/amassado.png",
+        destino: "tratativa"
+    },
+
+    {
+        imagem: "assets/pacotinhob.png",
+        destino: "saca"
+    },
 
     {
         imagem: "assets/caixa 1,10 -12kg.png",

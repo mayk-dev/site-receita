@@ -1,114 +1,278 @@
- 
+/* =========================================
+   RESET
+========================================= */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+
 html,
 body {
-
     width: 100%;
-    min-height: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    font-family: Arial, sans-serif;
+
     background-image: url("assets/fundo.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+
+/* =========================================
+   CENTRALIZAR JOGO NO COMPUTADOR
+========================================= */
+
+body {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+.areadejogo {
+    position: relative;
+
+    width: 1366px;
+    height: 790px;
+
+    flex-shrink: 0;
+
     overflow: hidden;
-
-    
-    
-    
-}
-
-.areadejogo{
-
-    width: 720px;
-    height: 810px;
-    margin: 10% auto;
-    background-color: rgba(0, 0, 0, 0);
 }
 
 
 
-    #caixa{
+#caixa {
     position: absolute;
-    width: 410px;
-    top: 5%;
-    left: 50%;
-    bottom: 0px;
-    z-index: 1;
-    transform: translateX(-50%)
-    }
 
-    #saca{
-    position: absolute;
-    width: 200px;
-    top: 63%;
-    left: 27%;
-    z-index: 2;
-    bottom: 50px;
-    
- }
- #gaiolatratativa{
-    position: absolute;
-    width: 219px;
-    top: 10%;
-    left: 63%;
-    bottom: 50px;
- }
-
-
-
-
-
-
-#logo{
-
-    position: absolute;
     width: 390px;
-    top: 10%;
-    left: 15%;
+    height: 700;
 
-    bottom: 50px;
+    top: 35px;
 
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 1;
+
+    user-select: none;
+
+    filter:
+        drop-shadow(
+            0 7px 8px
+            rgba(0, 0, 0, 0.4)
+        );
 }
 
-#botão{
 
+
+#area-caixa {
+    position: absolute;
+    width: 280px;
+    height: 650px;
+    top: 42px;
+    left: 50%;
+    transform: translateX(-50%);
+    border:
+        2px dashed
+        rgba(37, 129, 37, 0.45);
+
+    background-color:
+        rgba(0, 255, 0, 0.03);
+
+    z-index: 2;
+    pointer-events: none;
+}
+
+
+
+#saca {
+    position: absolute;
+    width: 180px;
+    height: auto;
+    left: 300px;
+    top: 480px ;
+    z-index: 10;
+    user-select: none;
+    filter:
+        drop-shadow(
+            0 7px 8px
+            rgba(0, 0, 0, 0.5)
+        );
+}
+
+
+#gaiolatratativa {
+    position: absolute;
+
+    width: 200px;
+    height: auto;
+
+    top: 75px;
+
+    right: 290px;
+
+    z-index: 10;
+
+    user-select: none;
+
+    filter:
+        drop-shadow(
+            0 7px 8px
+            rgba(0, 0, 0, 0.5)
+        );
+}
+
+
+
+#logo {
+    position: absolute;
+
+    width: 280px;
+    height: auto;
+
+    top: 55px;
+
+    left:200px;
+
+    z-index: 5;
+
+    user-select: none;
+}
+
+
+
+#esteira {
+    position: absolute;
+
+    width: 300px;
+    height: auto;
+
+    right: 230px;
+
+    bottom: 5px;
+
+    z-index: 10;
+
+    user-select: none;
+
+    filter:
+        drop-shadow(
+            0 7px 8px
+            rgba(0, 0, 0, 0.5)
+        );
+}
+
+
+
+
+#pacotes {
+    position: absolute;
+
+    width: 150px;
+    height: 180px;
+top:520;
+    right: 320px;
+
+    bottom: 130px;
+
+    z-index: 100;
+
+    pointer-events: none;
+}
+
+
+
+
+.pacote {
+    position: absolute;
+
+    width: 150px;
+    height: auto;
+
+    left: 0;
+    bottom: 0;
+
+    display: block;
+
+    cursor: grab;
+
+    user-select: none;
+
+    touch-action: none;
+
+    pointer-events: auto;
+
+    z-index: 100;
+}
+
+
+.pacote:active {
+    cursor: grabbing;
+}
+
+
+/* =========================================
+   BOTÃO ENVIAR PARA EXPEDIÇÃO
+========================================= */
+
+#botão {
     position: absolute;
 
     width: 320px;
     height: 65px;
 
     left: 50%;
-    bottom: 20px;
+
+    top: 720px;
 
     transform: translateX(-50%);
 
     display: flex;
-    align-items: center;
-    justify-content: center;
 
-    background: linear-gradient(
-        180deg,
-        #ff7a18 0%,
-        #ff5100 55%,
-        #d93b00 100%
-    );
+    justify-content: center;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ff7a18 0%,
+            #ff5100 55%,
+            #d93b00 100%
+        );
 
     color: white;
 
-    border: 3px solid #ffffff;
+    border: 3px solid white;
+
     border-radius: 16px;
 
     font-family: Arial, sans-serif;
+
     font-size: 19px;
+
     font-weight: 900;
+
     letter-spacing: 1px;
 
+    text-align: center;
+
     text-decoration: none;
-    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.35);
+
+    text-shadow:
+        0 2px 2px
+        rgba(0, 0, 0, 0.35);
 
     box-shadow:
         0 7px 0 #9e2b00,
@@ -116,7 +280,8 @@ body {
         inset 0 2px 3px rgba(255, 255, 255, 0.35);
 
     cursor: pointer;
-    z-index: 99999;
+
+    z-index: 9999;
 
     transition:
         transform 0.12s,
@@ -125,8 +290,11 @@ body {
 }
 
 
-/* Quando passa o mouse */
-#botao-expedicao:hover {
+/* =========================================
+   BOTÃO - PASSAR MOUSE
+========================================= */
+
+#botão:hover {
     filter: brightness(1.12);
 
     transform:
@@ -135,9 +303,11 @@ body {
 }
 
 
-/* Quando aperta */
-#botao-expedicao:active {
+/* =========================================
+   BOTÃO - CLICAR
+========================================= */
 
+#botão:active {
     transform:
         translateX(-50%)
         translateY(5px);
@@ -148,75 +318,27 @@ body {
 }
 
 
-
-#esteira{
-position: relative;
-    width: 350px;
-    top: 55%;
-    left: 80%;
-
-    bottom: 50px;
- }
-
-
-
-
-
-.pacote {
-    width: 200px;
-    height: auto;
-    display: block;
-    cursor: grab;
-    user-select: none;
-    touch-action: none;
-    position: absolute;
-    top: 72%;
-    left: 65%;
-    background-color: rgba(121, 32, 32, 0.021);
-    bottom: 50px;
-    z-index: 100;
-}
-.pacote:active {
-    cursor: grabbing;
-
-}
-
-
-#area-caixa {
-    position: absolute;
-
-    width: 291px;
-    height: 750px;
-
-    top: 5%;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    border: 3px dashed rgb(123, 158, 123);
-
-    background-color: rgba(0, 255, 0, 0.08);
-
-    z-index: 10;
-
-    pointer-events: none;
-
-
-}
+/* =========================================
+   TELA DE RESULTADO
+========================================= */
 
 #tela-resultado {
     display: none;
 
     position: fixed;
+
     top: 0;
     left: 0;
 
     width: 100%;
     height: 100%;
 
-    background-image: url("assets/fundo.png");
+    background-image:
+        url("assets/fundo.png");
+
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 
     z-index: 10000;
 
@@ -224,49 +346,474 @@ position: relative;
     align-items: center;
 }
 
+
+/* =========================================
+   PAINEL DO RESULTADO
+========================================= */
+
 .painel-resultado {
     width: 90%;
+
     max-width: 500px;
 
     padding: 40px 25px;
 
-    background: rgba(15, 20, 30, 0.95);
+    background:
+        rgba(15, 20, 30, 0.95);
 
     border: 3px solid white;
+
     border-radius: 20px;
 
     text-align: center;
+
     font-family: Arial, sans-serif;
 
     color: white;
 }
 
+
+/* =========================================
+   RESULTADO - TÍTULO
+========================================= */
+
 #titulo-resultado {
     font-size: 25px;
+
     margin-bottom: 30px;
 }
 
+
+/* =========================================
+   RESULTADO - STATUS
+========================================= */
+
 #status-resultado {
     font-size: 32px;
+
     font-weight: bold;
+
     margin-bottom: 20px;
 }
 
+
+/* =========================================
+   RESULTADO - TEXTO
+========================================= */
+
 #texto-resultado {
     font-size: 18px;
+
     line-height: 1.5;
 }
 
+
+/* =========================================
+   JOGAR NOVAMENTE
+========================================= */
+
 #jogar-novamente {
     margin-top: 30px;
+
     padding: 15px 30px;
 
     border: none;
+
     border-radius: 10px;
 
     font-size: 18px;
+
     font-weight: bold;
 
     cursor: pointer;
 }
 
+
+
+/* ============================================================
+   CELULAR
+   SOMENTE AQUI OS ASSETS MUDAM DE TAMANHO E POSIÇÃO
+============================================================ */
+
+@media (max-width: 600px) {
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+
+        overflow: hidden;
+    }
+
+
+    body {
+        display: block;
+    }
+
+
+    /* =====================================
+       ÁREA DO JOGO NO CELULAR
+    ===================================== */
+
+    .areadejogo {
+        position: relative;
+
+        width: 100vw;
+        height: 100vh;
+
+        overflow: hidden;
+    }
+
+
+    /* =====================================
+       CAIXA
+    ===================================== */
+
+    #caixa {
+        width: 43%;
+
+        height: auto;
+
+        top: 9%;
+
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        z-index: 1;
+    }
+
+
+    /* =====================================
+       ÁREA DA CAIXA
+    ===================================== */
+
+    #area-caixa {
+        width: 32%;
+
+        height: 66%;
+
+        top: 9.5%;
+
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        z-index: 2;
+    }
+
+
+    /* =====================================
+       LOGO
+    ===================================== */
+
+    #logo {
+        width: 31%;
+
+        height: auto;
+
+        top: 3%;
+
+        left: 3%;
+
+        z-index: 5;
+    }
+
+
+    /* =====================================
+       GAIOLA
+    ===================================== */
+
+    #gaiolatratativa {
+        width: 23%;
+
+        height: auto;
+
+        top: 13%;
+
+        right: 2%;
+
+        left: auto;
+
+        z-index: 10;
+    }
+
+
+    /* =====================================
+       SACA
+    ===================================== */
+
+    #saca {
+        width: 23%;
+
+        height: auto;
+
+        left: 3%;
+
+        bottom: 14%;
+
+        z-index: 10;
+    }
+
+
+    /* =====================================
+       ESTEIRA
+    ===================================== */
+
+    #esteira {
+        width: 36%;
+
+        height: auto;
+
+        right: 1%;
+
+        bottom: 14%;
+
+        z-index: 10;
+    }
+
+
+    /* =====================================
+       PACOTES
+    ===================================== */
+
+    #pacotes {
+        width: 19%;
+
+        height: 15%;
+
+        right: 9%;
+
+        bottom: 23%;
+
+        z-index: 100;
+    }
+
+
+    .pacote {
+        width: 100%;
+
+        height: auto;
+
+        left: 0;
+
+        bottom: 0;
+
+        z-index: 100;
+    }
+
+
+    /* =====================================
+       BOTÃO
+    ===================================== */
+
+    #botão {
+        width: 62%;
+
+        height: 55px;
+
+        left: 50%;
+
+        bottom: 3%;
+
+        transform: translateX(-50%);
+
+        font-size: 14px;
+
+        border-radius: 13px;
+
+        z-index: 9999;
+    }
+
+
+    #botão:hover {
+        transform: translateX(-50%);
+    }
+
+
+    #botão:active {
+        transform:
+            translateX(-50%)
+            translateY(4px);
+    }
+
+}
+
+
+
+/* ============================================================
+   CELULAR MUITO PEQUENO
+============================================================ */
+
+@media (max-width: 380px) {
+
+    /* ==============================
+       ÁREA DO JOGO
+    ============================== */
+
+    .areadejogo {
+        position: relative;
+
+        width: 100vw;
+        height: 100vh;
+
+        overflow: hidden;
+
+        background:
+            linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.05),
+                rgba(0, 0, 0, 0.28)
+            );
+    }
+
+
+    /* ==============================
+       LOGO
+    ============================== */
+
+    #logo {
+        position: absolute;
+
+        width: 42%;
+
+        top: 2%;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        z-index: 20;
+
+        filter:
+            drop-shadow(
+                0 4px 6px
+                rgba(0, 0, 0, 0.45)
+            );
+    }
+
+
+    /* ==============================
+       CAIXA PRINCIPAL
+    ============================== */
+
+    #caixa {
+        position: absolute;
+
+        width: 50%;
+
+        top: 12%;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        z-index: 2;
+
+        filter:
+            drop-shadow(
+                0 8px 10px
+                rgba(0, 0, 0, 0.5)
+            );
+    }
+
+
+    /* ==============================
+       ÁREA DA CAIXA
+    ============================== */
+
+    #area-caixa {
+        position: absolute;
+
+        width: 38%;
+        height: 55%;
+
+        top: 13%;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        border:
+            2px dashed
+            rgba(255, 255, 255, 0.20);
+
+        background:
+            rgba(255, 255, 255, 0.02);
+
+        pointer-events: none;
+
+        z-index: 3;
+    }
+
+
+    /* ==============================
+       GAIOLA DE TRATATIVA
+    ============================== */
+
+    #gaiolatratativa {
+        position: absolute;
+
+        width: 25%;
+
+        top: 18%;
+        right: 2%;
+
+        left: auto;
+
+        z-index: 10;
+
+        filter:
+            drop-shadow(
+                0 6px 8px
+                rgba(0, 0, 0, 0.55)
+            );
+    }
+
+
+    /* ==============================
+       SACA
+    ============================== */
+
+    #saca {
+        position: absolute;
+
+        width: 27%;
+
+        left: 3%;
+        bottom: 16%;
+
+        z-index: 10;
+
+        filter:
+            drop-shadow(
+                0 6px 8px
+                rgba(0, 0, 0, 0.55)
+            );
+    }
+
+
+    /* ==============================
+       ESTEIRA
+    ============================== */
+
+    #esteira {
+        position: absolute;
+
+        width: 43%;
+
+        right: -1%;
+        bottom: 16%;
+
+        z-index: 10;
+
+        filter:
+            drop-shadow(
+                0 7px 9px
+                rgba(0, 0, 0, 0.55)
+            );
+    }
+
+
+    /* ==============================
+       ÁREA DE NASCIMENTO DOS PACOTES
+    ============================== */
+
+    @media (max-width: 768px) { .areadejogo { transform: scale(0.8); transform-origin: top center; margin-top: 10px; } #caixa{ display: fixed; width: 401px; top: 20%; left: 20%; bottom: 0px; z-index: 4; transform: translateX(-50%) } #saca{ display: fixed; width: 118px; top: 100%; left: -14%; z-index:5 ; bottom: 50px; } #gaiolatratativa{ display: fixed; width: 109px; top: 30%; box-shadow: #00000000; left: 40%; z-index:5 ; bottom: 50px; border: 3px rgb(90, 55, 55); border-radius: 100px; } #area-caixa { display: fixed; width: 291px; height: 728px; top: 20%; left: 20%; z-index: 4; pointer-events: none; } #esteira{ width: 280px; top: 100%; left: 33%; z-index: 100; bottom: 50px; } #logo{ width: 376px; top: 1%; left: -6%; bottom: 50px; } #botão{ position: absolute; width: 320px; height: 65px; top: 125%; left: 20%; bottom: 20px; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; background: linear-gradient( 180deg, #ff7a18 0%, #ff5100 55%, #d93b00 100% ); } .pacote { width: 170px; z-index: 10; height: auto; cursor: grab; user-select: none; touch-action: none; position: absolute; top: 100%; left: 32%; background-color: rgba(121, 32, 32, 0.021); bottom: 50px; z-index: 100; } }}
